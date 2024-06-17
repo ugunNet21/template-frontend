@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+<style>
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #343a40;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.nav-tabs .nav-link i {
+    margin-right: 8px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Admin Dashboard</h1>
+        <ul class="nav nav-tabs mt-4" id="formTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">
+                    <i class="fas fa-pencil-alt"></i> Input 1
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">
+                    <i class="fas fa-pencil-alt"></i> Input 2
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">
+                    <i class="fas fa-pencil-alt"></i> Input 3
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">
+                    <i class="fas fa-pencil-alt"></i> Input 4
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab5-tab" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="false">
+                    <i class="fas fa-pencil-alt"></i> Input 5
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="formTabsContent">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                <form id="form1">
+                    <div class="form-group">
+                        <label for="input1">Input 1</label>
+                        <input type="text" class="form-control" id="input1" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary next-tab">Next</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                <form id="form2">
+                    <div class="form-group">
+                        <label for="input2">Input 2</label>
+                        <input type="text" class="form-control" id="input2" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary prev-tab">Previous</button>
+                    <button type="button" class="btn btn-secondary next-tab">Next</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                <form id="form3">
+                    <div class="form-group">
+                        <label for="input3">Input 3</label>
+                        <input type="text" class="form-control" id="input3" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary prev-tab">Previous</button>
+                    <button type="button" class="btn btn-secondary next-tab">Next</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                <form id="form4">
+                    <div class="form-group">
+                        <label for="input4">Input 4</label>
+                        <input type="text" class="form-control" id="input4" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary prev-tab">Previous</button>
+                    <button type="button" class="btn btn-secondary next-tab">Next</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+                <form id="form5">
+                    <div class="form-group">
+                        <label for="input5">Input 5</label>
+                        <input type="text" class="form-control" id="input5" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary prev-tab">Previous</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Input 1</th>
+                    <th>Input 2</th>
+                    <th>Input 3</th>
+                    <th>Input 4</th>
+                    <th>Input 5</th>
+                </tr>
+            </thead>
+            <tbody id="dataTable">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="script.js"></script>
+	<script>
+$(document).ready(function() {
+    function showTab(tabIndex) {
+        $('#formTabs a').eq(tabIndex).tab('show');
+    }
+
+    $('.next-tab').click(function() {
+        const currentIndex = $('#formTabs .nav-link.active').parent().index();
+        if (currentIndex < $('#formTabs .nav-link').length - 1) {
+            showTab(currentIndex + 1);
+        }
+    });
+
+    $('.prev-tab').click(function() {
+        const currentIndex = $('#formTabs .nav-link.active').parent().index();
+        if (currentIndex > 0) {
+            showTab(currentIndex - 1);
+        }
+    });
+
+    $('#form5').submit(function(event) {
+        event.preventDefault();
+
+        const input1 = $('#input1').val();
+        const input2 = $('#input2').val();
+        const input3 = $('#input3').val();
+        const input4 = $('#input4').val();
+        const input5 = $('#input5').val();
+
+        const table = $('#dataTable');
+        const rowCount = table.find('tr').length;
+        const newRow = `<tr>
+            <td>${rowCount}</td>
+            <td>${input1}</td>
+            <td>${input2}</td>
+            <td>${input3}</td>
+            <td>${input4}</td>
+            <td>${input5}</td>
+        </tr>`;
+        table.append(newRow);
+
+        $('#dataForm')[0].reset();
+        showTab(0);
+    });
+});
+
+</script>
+</body>
+</html>

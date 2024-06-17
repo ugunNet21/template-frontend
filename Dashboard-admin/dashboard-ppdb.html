@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard PPDB</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-section {
+            display: none;
+        }
+        .form-section.current {
+            display: block;
+        }
+        .btn-info, .btn-success {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Proses Pendaftaran PPDB</h2>
+    <ul class="nav nav-tabs" id="formTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="form-siswa-tab" data-toggle="tab" href="#form-siswa" role="tab" aria-controls="form-siswa" aria-selected="true" onclick="navigateToForm(0)">Data Siswa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="form-orangtua-tab" data-toggle="tab" href="#form-orangtua" role="tab" aria-controls="form-orangtua" aria-selected="false" onclick="navigateToForm(1)">Data Orang Tua</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="form-berkas-tab" data-toggle="tab" href="#form-berkas" role="tab" aria-controls="form-berkas" aria-selected="false" onclick="navigateToForm(2)">Berkas Siswa</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active form-section current" id="form-siswa" role="tabpanel" aria-labelledby="form-siswa-tab">
+            <form>
+                <div class="form-group">
+                    <label for="namaSiswa">Nama Siswa</label>
+                    <input type="text" class="form-control" id="namaSiswa" required>
+                </div>
+                <div class="form-group">
+                    <label for="nisnSiswa">NISN</label>
+                    <input type="text" class="form-control" id="nisnSiswa" required>
+                </div>
+                <div class="form-group">
+                    <label for="alamatSiswa">Alamat</label>
+                    <textarea class="form-control" id="alamatSiswa" rows="3" required></textarea>
+                </div>
+                <button type="button" class="btn btn-info" onclick="navigateToForm(1)">Next</button>
+            </form>
+        </div>
+        <div class="tab-pane fade form-section" id="form-orangtua" role="tabpanel" aria-labelledby="form-orangtua-tab">
+            <form>
+                <div class="form-group">
+                    <label for="namaAyah">Nama Ayah</label>
+                    <input type="text" class="form-control" id="namaAyah" required>
+                </div>
+                <div class="form-group">
+                    <label for="namaIbu">Nama Ibu</label>
+                    <input type="text" class="form-control" id="namaIbu" required>
+                </div>
+                <div class="form-group">
+                    <label for="alamatOrangtua">Alamat Orang Tua</label>
+                    <textarea class="form-control" id="alamatOrangtua" rows="3" required></textarea>
+                </div>
+                <button type="button" class="btn btn-info" onclick="navigateToForm(0)">Previous</button>
+                <button type="button" class="btn btn-info" onclick="navigateToForm(2)">Next</button>
+            </form>
+        </div>
+        <div class="tab-pane fade form-section" id="form-berkas" role="tabpanel" aria-labelledby="form-berkas-tab">
+            <form>
+                <div class="form-group">
+                    <label for="ijazah">Ijazah</label>
+                    <input type="file" class="form-control-file" id="ijazah" required>
+                </div>
+                <div class="form-group">
+                    <label for="kk">Kartu Keluarga</label>
+                    <input type="file" class="form-control-file" id="kk" required>
+                </div>
+                <button type="button" class="btn btn-info" onclick="navigateToForm(1)">Previous</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function navigateToForm(index) {
+        var tabs = $('#formTabs a');
+        tabs.removeClass('active');
+        $(tabs[index]).addClass('active');
+        $('.form-section').removeClass('current').removeClass('show').removeClass('active');
+        $('.form-section').eq(index).addClass('current').addClass('show').addClass('active');
+    }
+
+    $(document).ready(function() {
+        $('#formTabs a').on('click', function(event) {
+            event.preventDefault();
+            var index = $(this).parent().index();
+            navigateToForm(index);
+        });
+    });
+</script>
+</body>
+</html>
