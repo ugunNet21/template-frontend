@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@headlessui/react@1.4.1/dist/headlessui-react.cjs.production.min.js"></script>
+    <style>
+        #carousel-example { overflow: hidden; }
+        .carousel-inner { display: flex; }
+        .carousel-item { min-width: 100%; transition: transform 0.5s ease; }
+		
+		/* dark light-mode */
+		.dark-mode {
+			background-color: #1a202c;
+			color: white;
+		}
+
+		.dark-mode button {
+			background-color: #2d3748;
+			color: white;
+		}
+
+		.dark-mode .modal {
+			background-color: #2d3748;
+			color: white;
+		}
+
+		.light-mode {
+			background-color: white;
+			color: #1a202c;
+		}
+
+		.light-mode button {
+			background-color: #edf2f7;
+			color: #1a202c;
+		}
+
+		.light-mode .modal {
+			background-color: #f7fafc;
+			color: #1a202c;
+		}
+		
+		 /* live chat */
+        .live-chat {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #2c7a7b;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .live-chat:hover {
+            background-color: #245e5f;
+        }
+        .live-chat-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        .live-chat-label {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .live-chat-window {
+            position: fixed;
+            bottom: 150px;
+            right: 30px;
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+            z-index: 1000;
+        }
+        .live-chat-header {
+            background-color: #2c7a7b;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 1px solid #1f5354;
+        }
+        .live-chat-header h4 {
+            margin: 0;
+        }
+        .live-chat-messages {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .live-chat-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 0 10px 10px 10px;
+            font-size: 14px;
+        }
+        .live-chat-send {
+            background-color: #2c7a7b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 10px 10px 10px;
+        }
+        .live-chat-send:hover {
+            background-color: #245e5f;
+        }
+		
+    </style>
+</head>
+<body class="bg-gray-100">
+	
+	<!-- Loading Overlay -->
+	<div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+		<div class="bg-white p-6 rounded-lg shadow-lg">
+			<div class="flex justify-center items-center">
+				<svg class="animate-spin h-8 w-8 text-blue-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+					<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.96 7.96 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+				</svg>
+				<span class="text-lg text-blue-600">Loading...</span>
+			</div>
+		</div>
+	</div>
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-bold">School Logo</div>
+            <div class="hidden md:flex space-x-4">
+                <a href="#" class="text-white">Home</a>
+                <a href="#about" class="text-white">About</a>
+                <a href="#vision-mission" class="text-white">Vision & Mission</a>
+                <a href="#contact" class="text-white">Contact</a>
+				<button id="toggle-mode" class="bg-white text-blue-600 px-3 py-2 rounded">Toggle Mode</button>
+                <button class="bg-white text-blue-600 px-3 py-2 rounded login-button">Login</button>
+                <button class="bg-white text-blue-600 px-3 py-2 rounded signup-button">Sign Up</button>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="hamburger-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <a href="#" class="block text-white px-4 py-2">Home</a>
+            <a href="#about" class="block text-white px-4 py-2">About</a>
+            <a href="#vision-mission" class="block text-white px-4 py-2">Vision & Mission</a>
+            <a href="#contact" class="block text-white px-4 py-2">Contact</a>
+            <button class="bg-white text-blue-600 px-3 py-2 rounded w-full login-button">Login</button>
+            <button class="bg-white text-blue-600 px-3 py-2 rounded w-full mt-2 signup-button">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- Main Content with Sidebar -->
+    <div class="container mx-auto p-4 flex flex-col md:flex-row">
+        <!-- Main Content -->
+        <main class="md:w-3/4 md:pr-4">
+            <!-- Carousel -->
+            <div id="carousel-example" class="carousel relative shadow-2xl bg-white mb-8">
+                <div class="carousel-inner relative overflow-hidden w-full">
+                    <div class="carousel-item active float-left w-full">
+                        <img src="https://via.placeholder.com/1200x400" class="block w-full" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item float-left w-full">
+                        <img src="https://via.placeholder.com/1200x400" class="block w-full" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item float-left w-full">
+                        <img src="https://via.placeholder.com/1200x400" class="block w-full" alt="Slide 3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <section id="about" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">About Us</h2>
+                <p class="text-gray-700">Our school has a long history of academic excellence and nurturing environment for students to grow and thrive.</p>
+            </section>
+
+            <!-- Vision and Mission Section -->
+            <section id="vision-mission" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">Vision & Mission</h2>
+                <p class="text-gray-700"><strong>Vision:</strong> To be a center of excellence in education, fostering holistic development.</p>
+                <p class="text-gray-700 mt-2"><strong>Mission:</strong> To provide quality education that empowers students to reach their full potential and contribute positively to society.</p>
+            </section>
+
+            <!-- Photo Gallery -->
+            <section id="gallery" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">Photo Gallery</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 1">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 2">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 3">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 4">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 5">
+                    <img src="https://via.placeholder.com/300" class="w-full h-auto" alt="Gallery Photo 6">
+                </div>
+            </section>
+
+            <!-- Teacher List -->
+            <section id="teachers" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">Our Teachers</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full mx-auto" alt="Teacher 1">
+                        <h3 class="text-xl text-center mt-4">John Doe</h3>
+                        <p class="text-gray-600 text-center">Mathematics</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full mx-auto" alt="Teacher 2">
+                        <h3 class="text-xl text-center mt-4">Jane Smith</h3>
+                        <p class="text-gray-600 text-center">Science</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full mx-auto" alt="Teacher 3">
+                        <h3 class="text-xl text-center mt-4">Mark Johnson</h3>
+                        <p class="text-gray-600 text-center">English</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events -->
+            <section id="events" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">Upcoming Events</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <h3 class="text-xl font-bold">Science Fair</h3>
+                        <p class="text-gray-600">June 20, 2024</p>
+                        <p class="text-gray-700 mt-2">Join us for our annual science fair showcasing the projects and research of our students.</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <h3 class="text-xl font-bold">Art Exhibition</h3>
+                        <p class="text-gray-600">July 10, 2024</p>
+                        <p class="text-gray-700 mt-2">Experience the creativity of our students at the art exhibition featuring various artworks.</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <h3 class="text-xl font-bold">Sports Day</h3>
+                        <p class="text-gray-600">August 15, 2024</p>
+                        <p class="text-gray-700 mt-2">Participate in our sports day filled with exciting games and activities for all ages.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Posts -->
+            <section id="posts" class="my-8">
+                <h2 class="text-3xl font-bold mb-4">Recent Posts</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/300x150" class="w-full h-32 object-cover" alt="Post 1">
+                        <h3 class="text-xl font-bold mt-4">Post Title 1</h3>
+                        <p class="text-gray-600">June 18, 2024</p>
+                        <p class="text-gray-700 mt-2">This is a brief summary of the first post. It gives an overview of the content.</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/300x150" class="w-full h-32 object-cover" alt="Post 2">
+                        <h3 class="text-xl font-bold mt-4">Post Title 2</h3>
+                        <p class="text-gray-600">June 15, 2024</p>
+                        <p class="text-gray-700 mt-2">This is a brief summary of the second post. It gives an overview of the content.</p>
+                    </div>
+                    <div class="bg-white p-4 shadow-md rounded-lg">
+                        <img src="https://via.placeholder.com/300x150" class="w-full h-32 object-cover" alt="Post 3">
+                        <h3 class="text-xl font-bold mt-4">Post Title 3</h3>
+                        <p class="text-gray-600">June 10, 2024</p>
+                        <p class="text-gray-700 mt-2">This is a brief summary of the third post. It gives an overview of the content.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar Content -->
+        <aside class="md:w-1/4 mt-8 md:mt-0">
+            <!-- Recently -->
+            <section id="recently" class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Recently</h2>
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Recent Article 1</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Recent Article 2</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Recent Article 3</a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Categories -->
+            <section id="categories">
+                <h2 class="text-2xl font-bold mb-4">Categories</h2>
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Category 1</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Category 2</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="block p-2 bg-white shadow rounded">Category 3</a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="fixed bottom-0 w-full bg-blue-600 p-4 md:hidden">
+        <div class="flex justify-around">
+            <a href="#" class="text-white flex flex-col items-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2 4 4 8-8 4 4"></path>
+                </svg>
+                <span class="text-xs">Home</span>
+            </a>
+            <a href="#" class="text-white flex flex-col items-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                <span class="text-xs">Add</span>
+            </a>
+            <a href="#" class="text-white flex flex-col items-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 19.121a3 3 0 004.242 0L12 16.485l2.636 2.636a3 3 0 004.242 0 3 3 0 000-4.242L16.485 12l2.636-2.636a3 3 0 00-4.242-4.242L12 7.515l-2.636-2.636a3 3 0 00-4.242 4.242L7.515 12l-2.636 2.636a3 3 0 000 4.242z"></path>
+                </svg>
+                <span class="text-xs">Settings</span>
+            </a>
+        </div>
+    </nav>
+	
+	<!-- Modal Login -->
+	<div id="modal-login" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+		<div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+			<h2 class="text-2xl font-bold mb-6">Login</h2>
+			<form>
+				<div class="mb-4">
+					<label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+					<input type="text" id="username" name="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+				</div>
+				<div class="mb-4">
+					<label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+					<input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+				</div>
+				<button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Login</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Modal Sign Up -->
+	<div id="modal-signup" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+		<div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+			<h2 class="text-2xl font-bold mb-6">Sign Up</h2>
+			<form>
+				<div class="mb-4">
+					<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+					<input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+				</div>
+				<div class="mb-4">
+					<label for="new-password" class="block text-sm font-medium text-gray-700">New Password</label>
+					<input type="password" id="new-password" name="new-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+				</div>
+				<button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Sign Up</button>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Live Chat Button -->
+    <div id="live-chat" class="live-chat">
+        <span class="live-chat-icon">&#x1F4AC;</span>
+        <span class="live-chat-label">Live Chat</span>
+    </div>
+
+    <!-- Live Chat Window -->
+    <div id="live-chat-window" class="live-chat-window">
+        <div class="live-chat-header">
+            <h4>Live Chat</h4>
+        </div>
+        <div class="live-chat-messages" id="live-chat-messages">
+            <!-- Messages will be displayed here -->
+        </div>
+        <input type="text" id="live-chat-input" class="live-chat-input" placeholder="Type your message...">
+        <button id="live-chat-send" class="live-chat-send">Send</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 School Name. All Rights Reserved.</p>
+            <p>Contact us: info@schoolname.com</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Hamburger Menu and Carousel -->
+    <script>
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburgerButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const totalSlides = slides.length;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+		
+		// Toggle Modal Login
+		const loginButtons = document.querySelectorAll('.login-button');
+		const modalLogin = document.getElementById('modal-login');
+
+		loginButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				modalLogin.classList.remove('hidden');
+			});
+		});
+
+		// Function to close modal login
+		const closeModalLogin = () => {
+			modalLogin.classList.add('hidden');
+		};
+
+		// Toggle Modal Sign Up
+		const signupButtons = document.querySelectorAll('.signup-button');
+		const modalSignup = document.getElementById('modal-signup');
+
+		signupButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				modalSignup.classList.remove('hidden');
+			});
+		});
+
+		// Function to close modal signup
+		const closeModalSignup = () => {
+			modalSignup.classList.add('hidden');
+		};
+
+
+		// Toggle Loading Overlay
+		const loadingOverlay = document.getElementById('loading-overlay');
+
+		window.addEventListener('beforeunload', () => {
+			loadingOverlay.classList.remove('hidden');
+		});
+
+		window.addEventListener('load', () => {
+			loadingOverlay.classList.add('hidden');
+		});
+		
+		// scrpt Toggle ligh dark 
+		const toggleModeButton = document.getElementById('toggle-mode');
+		const body = document.body;
+
+		// Function to set dark mode
+		function enableDarkMode() {
+			body.classList.remove('light-mode');
+			body.classList.add('dark-mode');
+			localStorage.setItem('mode', 'dark');
+		}
+
+		// Function to set light mode
+		function enableLightMode() {
+			body.classList.remove('dark-mode');
+			body.classList.add('light-mode');
+			localStorage.setItem('mode', 'light');
+		}
+
+		// Function to toggle mode
+		function toggleMode() {
+			if (body.classList.contains('dark-mode')) {
+				enableLightMode();
+			} else {
+				enableDarkMode();
+			}
+		}
+
+		// Check localStorage for saved mode
+		const savedMode = localStorage.getItem('mode');
+
+		// Set initial mode based on localStorage or default to light mode
+		if (savedMode === 'dark') {
+			enableDarkMode();
+		} else {
+			enableLightMode();
+		}
+
+		// Event listener for mode toggle button
+		toggleModeButton.addEventListener('click', toggleMode);
+
+		// live chat
+		const liveChatButton = document.getElementById('live-chat');
+        const liveChatWindow = document.getElementById('live-chat-window');
+        const liveChatInput = document.getElementById('live-chat-input');
+        const liveChatSend = document.getElementById('live-chat-send');
+        const liveChatMessages = document.getElementById('live-chat-messages');
+
+        let isChatOpen = false;
+
+        // Toggle Live Chat Window
+        liveChatButton.addEventListener('click', () => {
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                liveChatWindow.style.display = 'block';
+            } else {
+                liveChatWindow.style.display = 'none';
+            }
+        });
+
+        // Send Message
+        liveChatSend.addEventListener('click', () => {
+            const message = liveChatInput.value.trim();
+            if (message !== '') {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.classList.add('message');
+                liveChatMessages.appendChild(messageElement);
+                liveChatInput.value = '';
+                // Scroll to bottom of messages
+                liveChatMessages.scrollTop = liveChatMessages.scrollHeight;
+            }
+        });
+
+        // Optional: Close chat window on outside click (uncomment if needed)
+        // window.addEventListener('click', (event) => {
+        //     if (!liveChatButton.contains(event.target) && !liveChatWindow.contains(event.target)) {
+        //         liveChatWindow.style.display = 'none';
+        //         isChatOpen = false;
+        //     }
+        // });
+    </script>
+
+</body>
+</html>
