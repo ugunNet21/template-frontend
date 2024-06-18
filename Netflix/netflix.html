@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-black p-4 md:flex md:justify-between md:items-center">
+        <div class="flex items-center justify-between">
+            <h1 class="text-2xl font-bold">Netflix</h1>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul class="hidden md:flex space-x-4">
+            <li><a href="#" class="hover:text-gray-400">Home</a></li>
+            <li><a href="#" class="hover:text-gray-400">TV Shows</a></li>
+            <li><a href="#" class="hover:text-gray-400">Movies</a></li>
+            <li><a href="#" class="hover:text-gray-400">New & Popular</a></li>
+            <li><a href="#" class="hover:text-gray-400">My List</a></li>
+            <li><a href="#" class="hover:text-gray-400">Login</a></li>
+            <li>
+                <div class="dropdown inline-block relative">
+                    <button class="text-white hover:text-gray-400 focus:outline-none">
+                        Language
+                    </button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                        <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">English</a></li>
+                        <li><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Spanish</a></li>
+                        <!-- Add more languages as needed -->
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black text-white p-4">
+        <ul class="flex flex-col space-y-4">
+            <li><a href="#" class="hover:text-gray-400">Home</a></li>
+            <li><a href="#" class="hover:text-gray-400">TV Shows</a></li>
+            <li><a href="#" class="hover:text-gray-400">Movies</a></li>
+            <li><a href="#" class="hover:text-gray-400">New & Popular</a></li>
+            <li><a href="#" class="hover:text-gray-400">My List</a></li>
+            <li><a href="#" class="hover:text-gray-400">Login</a></li>
+            <li>
+                <div class="dropdown inline-block relative">
+                    <button class="text-white hover:text-gray-400 focus:outline-none">
+                        Language
+                    </button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                        <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">English</a></li>
+                        <li><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Spanish</a></li>
+                        <!-- Add more languages as needed -->
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8">
+        <h2 class="text-3xl font-bold mb-4">Popular on Netflix</h2>
+
+        <!-- Movie Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <!-- Sample Movie Card (Repeat as needed) -->
+            <div class="relative">
+                <img src="https://via.placeholder.com/300x450" alt="Movie Poster" class="w-full h-auto rounded-lg">
+                <div class="absolute inset-0 bg-gray-800 opacity-0 hover:opacity-75 transition duration-300">
+                    <div class="flex items-center justify-center h-full">
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Play</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for more movie cards -->
+            <!-- Example -->
+            <div class="relative">
+                <img src="https://via.placeholder.com/300x450" alt="Movie Poster" class="w-full h-auto rounded-lg">
+                <div class="absolute inset-0 bg-gray-800 opacity-0 hover:opacity-75 transition duration-300">
+                    <div class="flex items-center justify-center h-full">
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Play</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End Example -->
+        </div>
+
+        <!-- Additional Features -->
+        <section class="mt-8">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-gray-800 rounded-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Enjoy on your TV.</h3>
+                    <p class="mb-4">Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Watch on TV</button>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Download your shows to watch offline.</h3>
+                    <p class="mb-4">Save your favorites easily and always have something to watch.</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Download</button>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Watch anywhere.</h3>
+                    <p class="mb-4">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV without paying more.</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Watch Now</button>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Frequently Asked Questions</h3>
+                    <p class="mb-4">Find answers to common questions about Netflix, billing, account details, and more.</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">FAQ</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Subscription -->
+        <section class="mt-8 bg-gray-800 p-8 rounded-lg text-center">
+            <h3 class="text-2xl font-bold mb-4">Ready to watch? Enter your email to create or restart your membership.</h3>
+            <form action="#" class="flex justify-center">
+                <input type="email" placeholder="Email address" class="py-2 px-4 rounded-l-lg focus:outline-none w-80">
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-r-lg">Get Started</button>
+            </form>
+        </section>
+    </main>
+
+   <!-- Bottom Navigation (Visible on Mobile) -->
+    <nav id="bottom-navigation" class="fixed bottom-0 left-0 right-0 bg-gray-900 md:hidden p-4">
+        <ul class="flex justify-around">
+            <li><a href="#" class="text-white hover:text-gray-400">Home</a></li>
+            <li><a href="#" class="text-white hover:text-gray-400">TV Shows</a></li>
+            <li><a href="#" class="text-white hover:text-gray-400">Movies</a></li>
+            <li><a href="#" class="text-white hover:text-gray-400">New & Popular</a></li>
+            <li><a href="#" class="text-white hover:text-gray-400">My List</a></li>
+        </ul>
+       </nav>
+  
+   <!-- Footer -->
+    <footer class="bg-black text-gray-400 text-center py-4">
+        <p>&copy; 2024 Netflix Clone. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle mobile menu visibility
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
