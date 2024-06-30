@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">Face Recognition Attendance</h1>
+        <video id="video" class="w-full rounded mb-4" autoplay muted></video>
+        <button id="startButton" class="w-full bg-blue-500 text-white p-2 rounded">Start Attendance</button>
+        <div id="result" class="mt-4 text-center"></div>
+    </div>
+
+    <!-- Load face-api.js from a CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const video = document.getElementById('video');
+            const startButton = document.getElementById('startButton');
+            const result = document.getElementById('result');
+
+            // Load face-api.js models
+            await Promise.all([
+                faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+                faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+                faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+            ]);
+
+            startVideo();
+
+            function startVideo() {
+                navigator.getUserMedia(
+                    { video: {} },
+                    stream => video.srcObject = stream,
+                    err => console.error(err)
+                );
+            }
+
+            video.addEventListener('play', () => {
+                const canvas = faceapi.createCanvasFromMedia(video);
+                document.body.append(canvas);
+                const displaySize = { width: video.width, height: video.height };
+                faceapi.matchDimensions(canvas, displaySize);
+
+                startButton.addEventListener('click', async () => {
+                    const labeledFaceDescriptors = await loadLabeledImages();
+                    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+
+                    setInterval(async () => {
+                        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors();
+                        const resizedDetections = faceapi.resizeResults(detections, displaySize);
+                        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+                        faceapi.draw.drawDetections(canvas, resizedDetections);
+                        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+
+                        const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
+                        results.forEach((result, i) => {
+                            const box = resizedDetections[i].detection.box;
+                            const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() });
+                            drawBox.draw(canvas);
+
+                            if (result.label !== 'unknown') {
+                                result.innerHTML = `<p class="text-green-500 font-bold">${result.label} is present</p>`;
+                            } else {
+                                result.innerHTML = `<p class="text-red-500 font-bold">Unknown face detected</p>`;
+                            }
+                        });
+                    }, 100);
+                });
+            });
+
+            async function loadLabeledImages() {
+                const labels = ['Person1', 'Person2', 'Person3']; // Labels of known persons
+                return Promise.all(
+                    labels.map(async label => {
+                        const descriptions = [];
+                        for (let i = 1; i <= 2; i++) { // Assuming 2 images per person for training
+                            const img = await faceapi.fetchImage(`/labeled_images/${label}/${i}.jpg`);
+                            const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+                            descriptions.push(detections.descriptor);
+                        }
+                        return new faceapi.LabeledFaceDescriptors(label, descriptions);
+                    })
+                );
+            }
+        });
+    </script>
+</body>
+</html>
