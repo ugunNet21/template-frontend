@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Minimarket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md p-6 mb-6">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-bold text-gray-800">Minimarket POS System</h1>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <!-- Left Column: Product Menu -->
+    <div class="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-1">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Product Menu</h2>
+
+      <!-- Category Tabs -->
+      <div class="mb-4">
+        <button class="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none" onclick="filterByCategory('all')">All</button>
+        <button class="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none" onclick="filterByCategory('food')">Food</button>
+        <button class="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none" onclick="filterByCategory('beverages')">Beverages</button>
+        <button class="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none" onclick="filterByCategory('household')">Household</button>
+      </div>
+
+      <!-- Product List -->
+      <div id="product-list" class="grid grid-cols-1 gap-4">
+        <!-- Dynamically inserted products will appear here -->
+      </div>
+    </div>
+
+    <!-- Middle Column: Search & Add Item -->
+    <div class="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Add Item by Barcode</h2>
+      <div class="mb-6">
+        <input type="text" id="barcode-input" placeholder="Enter barcode or search..." class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <button onclick="addItemByBarcode()" class="mt-4 bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 focus:outline-none w-full">Add Product by Barcode</button>
+      </div>
+
+      <!-- Checkout Section -->
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Transaction Details</h2>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-left text-gray-600">
+          <thead>
+            <tr>
+              <th class="p-3 border-b-2 border-gray-300">Item</th>
+              <th class="p-3 border-b-2 border-gray-300">Qty</th>
+              <th class="p-3 border-b-2 border-gray-300">Price</th>
+              <th class="p-3 border-b-2 border-gray-300">Total</th>
+              <th class="p-3 border-b-2 border-gray-300">Action</th>
+            </tr>
+          </thead>
+          <tbody id="items-list">
+            <!-- Dynamically Inserted Rows Here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Total Section -->
+      <div class="flex justify-end items-center mt-6">
+        <div class="text-right">
+          <h2 class="text-xl font-bold text-gray-700">Total: $<span id="total-amount">0.00</span></h2>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <div class="flex justify-end mt-8">
+        <button onclick="checkout()" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+let items = [];
+let products = [
+  { id: 1, name: "Apple", price: 1.2, category: "food", barcode: "12345" },
+  { id: 2, name: "Bread", price: 2.5, category: "food", barcode: "12346" },
+  { id: 3, name: "Cola", price: 1.5, category: "beverages", barcode: "12347" },
+  { id: 4, name: "Detergent", price: 5.0, category: "household", barcode: "12348" },
+  // Add more products here
+];
+
+// Function to display products by category
+function filterByCategory(category) {
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = '';
+  
+  products.forEach(product => {
+    if (category === 'all' || product.category === category) {
+      const productCard = `
+        <div class="p-4 bg-gray-200 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-800">${product.name}</h3>
+          <p class="text-gray-600">$${product.price.toFixed(2)}</p>
+          <button class="mt-2 bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 focus:outline-none" onclick="addItem(${product.id})">Add</button>
+        </div>
+      `;
+      productList.innerHTML += productCard;
+    }
+  });
+}
+
+// Initialize with all products displayed
+filterByCategory('all');
+
+// Function to add item by selecting from product menu
+function addItem(productId) {
+  const product = products.find(p => p.id === productId);
+  const qty = 1;
+  const total = qty * product.price;
+
+  items.push({ name: product.name, qty, price: product.price, total });
+  updateTable();
+  updateTotal();
+}
+
+// Function to add item by barcode
+function addItemByBarcode() {
+  const barcode = document.getElementById('barcode-input').value;
+  const product = products.find(p => p.barcode === barcode);
+
+  if (product) {
+    addItem(product.id);
+    document.getElementById('barcode-input').value = '';
+  } else {
+    alert('Product not found');
+  }
+}
+
+// Function to update the item table
+function updateTable() {
+  const itemsList = document.getElementById('items-list');
+  itemsList.innerHTML = '';
+
+  items.forEach((item, index) => {
+    const row = `
+      <tr>
+        <td class="p-3 border-b border-gray-200">${item.name}</td>
+        <td class="p-3 border-b border-gray-200">${item.qty}</td>
+        <td class="p-3 border-b border-gray-200">$${item.price.toFixed(2)}</td>
+        <td class="p-3 border-b border-gray-200">$${item.total.toFixed(2)}</td>
+        <td class="p-3 border-b border-gray-200">
+          <button onclick="removeItem(${index})" class="text-red-500 hover:text-red-700">Remove</button>
+        </td>
+      </tr>
+    `;
+    itemsList.innerHTML += row;
+  });
+}
+
+// Function to update the total amount
+function updateTotal() {
+  const totalAmount = items.reduce((acc, item) => acc + item.total, 0);
+  document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+}
+
+// Function to remove an item
+function removeItem(index) {
+  items.splice(index, 1);
+  updateTable();
+  updateTotal();
+}
+
+// Function to handle checkout
+function checkout() {
+  if (items.length > 0) {
+    alert(`Total amount to pay: $${items.reduce((acc, item) => acc + item.total, 0).toFixed(2)}`);
+    items = [];
+    updateTable();
+    updateTotal();
+  } else {
+    alert('No items to checkout.');
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMP SMA Al-Ihsan Cimencang</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles for the hamburger menu */
+        .hamburger {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header Section -->
+    <header class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Info Belajar</h1>
+            <nav>
+                <ul class="flex space-x-4 nav-links">
+                    <li><a href="#" class="hover:underline">Beranda</a></li>
+                    <li><a href="#" class="hover:underline">Tentang</a></li>
+                    <li><a href="#" class="hover:underline">Jenjang</a></li>
+                </ul>
+                <button class="hamburger text-2xl focus:outline-none">
+                    ☰
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="container mx-auto mt-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-8 text-center bg-blue-600 text-white">
+                <h2 class="text-3xl font-bold">SMP SMA Al-Ihsan Cimencang</h2>
+                <p class="mt-2">ABS (Al-Ihsan Boarding School)</p>
+            </div>
+            <div class="p-8">
+                <p>Jl. Cimencarang Kelurahan Cimincarng, Kec. Gedebage, Kota Bandung, Jawa Barat 40294</p>
+                <p>Email: <a href="mailto:infosmpalihsan2022@gmail.com" class="text-blue-500 hover:underline">infosmpalihsan2022@gmail.com</a> | <a href="mailto:gurusma.ibslabkom@gmail.com" class="text-blue-500 hover:underline">gurusma.ibslabkom@gmail.com</a></p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="#" class="text-blue-600"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-blue-600"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-blue-600"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-blue-600"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">👤</div>
+                <h3 class="text-xl font-bold">Tentang</h3>
+            </a>
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">📰</div>
+                <h3 class="text-xl font-bold">Berita</h3>
+            </a>
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">🏫</div>
+                <h3 class="text-xl font-bold">Sekolah</h3>
+            </a>
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">🏃‍♂️</div>
+                <h3 class="text-xl font-bold">Eskul</h3>
+            </a>
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">🔍</div>
+                <h3 class="text-xl font-bold">Projek P5</h3>
+            </a>
+            <a href="#" class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-2xl mb-2">👨‍🏫</div>
+                <h3 class="text-xl font-bold">Pendidik</h3>
+            </a>
+        </div>
+    </main>
+
+    <!-- JavaScript for Hamburger Menu -->
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

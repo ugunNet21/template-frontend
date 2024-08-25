@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+body {
+    background-color: #f8f9fa;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.content {
+    margin-left: 220px;
+    width: calc(100% - 440px); /* Sidebar + Order Menu width */
+}
+
+#order-sidebar {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-left: 1px solid #ddd;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.order-list img {
+    border-radius: 10px;
+}
+
+.order-list span {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="container-fluid p-0 d-flex flex-nowrap">
+        <div id="sidebar" class="bg-light p-3">
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link active">
+                        <img src="logo.png" alt="Logo" class="logo mb-4">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link"><span>Dashboard</span></a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link"><span>Message</span></a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link"><span>Bills</span></a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link"><span>Setting</span></a>
+                </li>
+                <li class="nav-item mt-auto">
+                    <a href="#" class="nav-link"><span>Log Out</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content p-3 flex-fill">
+            <!-- Menu Category -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <h3>Menu Category</h3>
+                <input type="text" class="form-control w-50 w-md-25 mt-3 mt-md-0" placeholder="Search food, coffee, etc.">
+            </div>
+
+            <div class="menu-category mt-4 d-flex justify-content-between flex-wrap">
+                <button class="btn btn-outline-primary mb-2">Hot</button>
+                <button class="btn btn-outline-primary mb-2">Burger</button>
+                <button class="btn btn-outline-primary mb-2">Pizza</button>
+                <button class="btn btn-outline-primary mb-2">Snack</button>
+                <button class="btn btn-outline-primary mb-2">Soft Drink</button>
+                <button class="btn btn-outline-primary mb-2">Coffee</button>
+                <button class="btn btn-outline-primary mb-2">Ice Cream</button>
+            </div>
+
+            <!-- Choose Order -->
+            <h4 class="mt-5">Choose Order</h4>
+            <div class="row mt-3">
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="burger.png" class="card-img-top" alt="Origin Burger">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Origin Burger</h5>
+                            <p class="card-text">$5.45</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- More product cards here -->
+            </div>
+
+            <!-- Recent Order -->
+            <h4 class="mt-5">Recent Order</h4>
+            <div class="row mt-3">
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="chicken.png" class="card-img-top" alt="Chicken Box">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Chicken Box</h5>
+                            <p class="card-text">$5.45</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- More recent order cards here -->
+            </div>
+        </div>
+
+        <!-- Order Menu Sidebar -->
+        <div id="order-sidebar" class="p-4 bg-light">
+            <h4>Order Menu</h4>
+            <div class="order-list mt-4">
+                <!-- Order Item -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <img src="burger-thumb.png" alt="Origin Burger" class="img-fluid rounded" style="width: 50px;">
+                    <span>X2</span>
+                    <span>$10.90</span>
+                </div>
+                <!-- More order items here -->
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <span>Sub Total:</span>
+                <span>$24.60</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>Tax (5%):</span>
+                <span>$1.22</span>
+            </div>
+            <button class="btn btn-danger w-100 mt-3">Order Now</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("Cashier App Loaded");
+    // Additional JS logic can be added here if needed
+});
+
+</script>
+</body>
+
+</html>

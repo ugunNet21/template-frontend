@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Argon Dashboard 2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/argon-dashboard.min.css" rel="stylesheet">
+    <style>
+        /* Adjusting the margin of chat area to ensure it's not overlapped by sidebar */
+        @media (min-width: 768px) {
+            .chat-area {
+                margin-left: 25%; /* Adjust margin to push chat area to the right */
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex flex-column flex-md-row h-100">
+        <!-- Sidebar / Hamburger Menu -->
+        <div class="bg-dark text-white p-3 position-fixed h-100 d-md-block" id="sidebar" style="width: 50%; max-width: 320px;">
+            <div class="d-flex align-items-center mb-4">
+                <img src="https://via.placeholder.com/50" alt="Logo" class="rounded-circle">
+                <span class="ms-3 h4 mb-0">Si Paten</span>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link text-white bg-secondary rounded px-3 py-2 d-flex align-items-center">
+                        <i class="ni ni-email-83 me-2"></i> Pesan
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="nav-link text-secondary rounded px-3 py-2 d-flex align-items-center">
+                        <i class="ni ni-bell-55 me-2"></i> Notifikasi
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Hamburger Button -->
+        <div class="d-md-none bg-dark text-white p-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/40" alt="Logo" class="rounded-circle">
+                <span class="ms-3 h4 mb-0">Si Paten</span>
+            </div>
+            <button id="hamburger-btn" class="btn btn-outline-light">
+                <i class="ni ni-align-left-2"></i>
+            </button>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="flex-grow-1 d-flex flex-column chat-area">
+            <!-- Contacts List -->
+            <div class="border-end border-secondary d-none d-md-block" style="width: 25%;">
+                <!-- Search Bar -->
+                <div class="p-3 border-bottom">
+                    <input type="text" placeholder="Search..." class="form-control">
+                </div>
+                <!-- Contacts -->
+                <div class="overflow-auto" style="height: calc(100vh - 56px);">
+                    <div class="p-3 d-flex align-items-center border-bottom hover-shadow-sm cursor-pointer">
+                        <div class="bg-secondary rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                            <span class="text-white">OD</span>
+                        </div>
+                        <div class="ms-3">
+                            <p class="mb-0 fw-bold">Operator Disdik</p>
+                            <p class="mb-0 text-muted small">weit</p>
+                        </div>
+                        <span class="ms-auto text-muted small">12:15 PM</span>
+                    </div>
+                    <!-- Add more contacts as needed -->
+                    <div class="p-3 d-flex align-items-center border-bottom hover-shadow-sm cursor-pointer">
+                        <div class="bg-secondary rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                            <span class="text-white">DKUM</span>
+                        </div>
+                        <div class="ms-3">
+                            <p class="mb-0 fw-bold">Dinas Koperasi dan Usaha Kecil</p>
+                            <p class="mb-0 text-muted small">Hello, how can we assist you today?</p>
+                        </div>
+                        <span class="ms-auto text-muted small">11:30 AM</span>
+                    </div>
+                    <div class="p-3 d-flex align-items-center border-bottom hover-shadow-sm cursor-pointer">
+                        <div class="bg-secondary rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                            <span class="text-white">F</span>
+                        </div>
+                        <div class="ms-3">
+                            <p class="mb-0 fw-bold">FGHFH</p>
+                            <p class="mb-0 text-muted small">Are you available?</p>
+                        </div>
+                        <span class="ms-auto text-muted small">10:45 AM</span>
+                    </div>
+                    <!-- Continue adding contacts -->
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="flex-grow-1 d-flex flex-column">
+                <!-- Chat Header -->
+                <div class="bg-light border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                            <span class="text-white">OD</span>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="mb-0">Operator Disdik</h5>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-secondary">
+                        <i class="ni ni-fat-remove"></i>
+                    </button>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="flex-grow-1 p-3 overflow-auto">
+                    <div class="d-flex align-items-end mb-4">
+                        <div class="bg-secondary text-white p-3 rounded">
+                            <p class="mb-1">coy</p>
+                            <span class="text-muted small">12:14 PM</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-end mb-4">
+                        <div class="bg-primary text-white p-3 rounded">
+                            <p class="mb-1">weit</p>
+                            <span class="text-muted small">12:15 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="border-top p-3 d-flex align-items-center">
+                    <input type="text" class="form-control me-2" placeholder="Type your message...">
+                    <button class="btn btn-primary">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('d-none');
+        });
+    </script>
+</body>
+
+</html>
