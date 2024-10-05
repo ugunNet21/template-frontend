@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung Aplikasi Cigoy</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
+    <!-- Alpine.js for modal functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.9.0/dist/alpine.min.js"
+        integrity="sha384-GDYd+1Gn6zE3uLz5o0UHapz/Tp6xPJvDAW1hGjZqZ0y+jCRqdc6uJboFJ9E+vFQI"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <h1 class="text-lg font-semibold">Warung Aplikasi Cigoy</h1>
+                <!-- Dark/Light Mode Toggle -->
+                <div x-data="{ darkMode: false }">
+                    <button @click="darkMode = !darkMode"
+                        class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                        <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 2a.75.75 0 0 1 .75.75v8.977l2.525-2.527a.75.75 0 1 1 1.061 1.061l-3.772 3.772a.75.75 0 0 1-1.061 0L5.664 9.26a.75.75 0 0 1 1.06-1.06L9.25 11.5V3.75A.75.75 0 0 1 10 3zm8 13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6.268a.75.75 0 1 1 1.5 0V16h14v-6.518a.75.75 0 0 1 1.5 0V16z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M13 16v-1h3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1h3v1h7zM10 2a.75.75 0 0 0-.75.75V5h1.5V2.75A.75.75 0 0 0 10 2zm8 2h-1v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V4H2a1 1 0 0 0-1 1v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a1 1 0 0 0-1-1zM6 6v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6H6z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button @click="darkMode = !darkMode"
+                        class="ml-3 text-gray-600 hover:text-gray-800 focus:outline-none">
+                        <span x-show="!darkMode">Mode Gelap</span>
+                        <span x-show="darkMode">Mode Terang</span>
+                    </button>
+                </div>
+
+                <!-- Navigasi -->
+                <nav class="hidden md:block">
+                    <a href="#" class="text-gray-600 hover:text-gray-800 px-4 py-2">Produk</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-800 px-4 py-2">Tentang Kami</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-800 px-4 py-2">Kontak</a>
+                </nav>
+
+                <!-- Hamburger Menu -->
+                <div class="md:hidden">
+                    <button @click="open = !open" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12.293 5.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 10.586l2.293-2.293a1 1 0 0 1 1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Isi konten produk disini -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Contoh produk -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://via.placeholder.com/300" alt="Produk 1" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h2 class="font-semibold text-lg">Nama Produk 1</h2>
+                    <p class="text-gray-600">Deskripsi singkat produk 1.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-900 font-bold">Rp 100.000</span>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Beli</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Contoh produk lainnya -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://via.placeholder.com/300" alt="Produk 2" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h2 class="font-semibold text-lg">Nama Produk 2</h2>
+                    <p class="text-gray-600">Deskripsi singkat produk 2.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-900 font-bold">Rp 150.000</span>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Beli</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Produk lainnya -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://via.placeholder.com/300" alt="Produk 3" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h2 class="font-semibold text-lg">Nama Produk 3</h2>
+                    <p class="text-gray-600">Deskripsi singkat produk 3.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-900 font-bold">Rp 200.000</span>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Beli</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation (visible on mobile) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-md md:hidden">
+        <div class="flex justify-around items-center py-2">
+            <a href="#" class="text-gray-600 hover:text-gray-800 flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M10 2a.75.75 0 0 1 .75.75v8.977l2.525-2.527a.75.75 0 1 1 1.061 1.061l-3.772 3.772a.75.75 0 0 1-1.061 0L5.664 9.26a.75.75 0 0 1 1.06-1.06L9.25 11.5V3.75A.75.75 0 0 1 10 3zm8 13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6.268a.75.75 0 1 1 1.5 0V16h14v-6.518a.75.75 0 0 1 1.5 0V16z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span class="text-xs">Beranda</span>
+            </a>
+            <a href="#" class="text-gray-600 hover:text-gray-800 flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M17 16.268V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12.268A1.75 1.75 0 0 0 3.75 18h12.5a1.75 1.75 0 0 0 1.75-1.732zM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </svg>
+                <span class="text-xs">Produk</span>
+            </a>
+            <a href="#" class="text-gray-600 hover:text-gray-800 flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M13 16v-1h3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1h3v1h7zM10 2a.75.75 0 0 0-.75.75V5h1.5V2.75A.75.75 0 0 0 10 2zm8 2h-1v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V4H2a1 1 0 0 0-1 1v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a1 1 0 0 0-1-1zM6 6v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6H6z" />
+                </svg>
+                <span class="text-xs">Akun</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Modal Login -->
+    <div x-data="{ openModal: false }">
+        <div x-show="openModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div class="bg-white rounded-lg overflow-hidden shadow-md max-w-md w-full mx-4">
+                <div class="p-4">
+                    <!-- Content of Login Modal -->
+                    <h2 class="text-xl font-semibold mb-4">Masuk atau Daftar</h2>
+                    <form action="#" method="POST" class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <label for="username" class="w-1/4">Username</label>
+                            <input type="text" id="username" name="username"
+                                class="flex-1 border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring focus:border-blue-500"
+                                required>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label for="password" class="w-1/4">Password</label>
+                            <input type="password" id="password" name="password"
+                                class="flex-1 border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring focus:border-blue-500"
+                                required>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Masuk</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Modal untuk Tampilan Mobile -->
+        <button @click="openModal = !openModal"
+            class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full md:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M13 16.268V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12.268A1.75 1.75 0 0 0 3.75 18h12.5a1.75 1.75 0 0 0 1.75-1.732zM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Dark Mode Script -->
+    <script>
+        const darkModeStorage = localStorage.getItem('darkMode');
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+
+        const enableDarkMode = () => {
+            document.body.classList.add('dark');
+            localStorage.setItem('darkMode', 'enabled');
+        };
+
+        const disableDarkMode = () => {
+            document.body.classList.remove('dark');
+            localStorage.setItem('darkMode', null);
+        };
+
+        if (darkModeStorage === 'enabled') {
+            enableDarkMode();
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            darkModeStorage !== 'enabled' ? enableDarkMode() : disableDarkMode();
+        });
+    </script>
+
+</body>
+
+</html>

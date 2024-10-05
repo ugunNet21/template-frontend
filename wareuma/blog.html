@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Wareuma</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .header {
+            background-color: #042C37;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 20px;
+        }
+
+        .blog-section {
+            padding: 60px 0;
+        }
+
+        .blog-card {
+            border: none;
+            border-radius: 8px;
+            transition: box-shadow 0.3s;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-section {
+            background-color: #042C37;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background-color: #f0ad4e;
+            color: #000;
+            border-radius: 30px;
+        }
+
+        .btn-custom:hover {
+            background-color: #ec971f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>Our Blog</h1>
+            <p>Insights and Updates from Wareuma</p>
+        </div>
+    </header>
+
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Latest Articles</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">The Future of Digital Transformation</h5>
+                        <p class="card-text">Exploring trends and technologies that will shape the future of digital transformation in businesses.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">Effective Strategies for Remote Work</h5>
+                        <p class="card-text">Learn how to enhance productivity and collaboration in a remote work environment.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">Harnessing AI for Business Growth</h5>
+                        <p class="card-text">Discover how artificial intelligence can drive growth and innovation in your organization.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">Cybersecurity Best Practices</h5>
+                        <p class="card-text">Essential tips to protect your business from cyber threats and vulnerabilities.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">The Role of Cloud Computing</h5>
+                        <p class="card-text">Understanding the impact of cloud computing on modern business operations.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card blog-card p-4">
+                        <h5 class="card-title">Navigating Digital Disruption</h5>
+                        <p class="card-text">Strategies for adapting to rapid changes in the digital landscape.</p>
+                        <a href="#" class="btn btn-custom">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest updates and insights.</p>
+            <a href="/subscribe" class="btn btn-custom btn-lg">Subscribe Now</a>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
