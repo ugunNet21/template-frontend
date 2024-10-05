@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+header {
+    background: #6c757d;
+    color: white;
+    padding: 50px 0;
+}
+
+header h1 {
+    font-size: 3em;
+}
+
+header h2 {
+    font-size: 2em;
+    margin-top: 20px;
+}
+
+#details, #location, #comments {
+    background: #ffffff;
+    padding: 50px 0;
+}
+
+#details h3, #location h3, #comments h3 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#gallery img {
+    border-radius: 10px;
+}
+
+#rsvp h3 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+footer {
+    background: #6c757d;
+    color: white;
+    padding: 20px 0;
+}
+
+.comment {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+</style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Wedding Invitation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#details">Details</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+                <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+                <li class="nav-item"><a class="nav-link" href="#comments">Comments</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="text-center py-5">
+        <h1 class="display-4">You're Invited!</h1>
+        <p class="lead">Join us for the wedding celebration of</p>
+        <h2 class="font-italic">John & Jane</h2>
+    </header>
+
+    <!-- Event Details Section -->
+    <section id="details" class="py-5">
+        <div class="container text-center">
+            <h3 class="mb-4">Event Details</h3>
+            <p><strong>Date:</strong> July 15, 2024</p>
+            <p><strong>Time:</strong> 4:00 PM</p>
+            <p><strong>Location:</strong> Beautiful Garden, Main Street, City</p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-5 bg-light">
+        <div class="container text-center">
+            <h3 class="mb-4">Photo Gallery</h3>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300" class="img-fluid" alt="Photo 1">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300" class="img-fluid" alt="Photo 2">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <img src="https://via.placeholder.com/300" class="img-fluid" alt="Photo 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-5">
+        <div class="container text-center">
+            <h3 class="mb-4">Location</h3>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.467072896294!2d106.70098141480057!3d10.762622892328023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292920e0e2b7%3A0x8ad12c8a21a79bd1!2sNotre%20Dame%20Cathedral%20of%20Saigon!5e0!3m2!1sen!2s!4v1615648692294!5m2!1sen!2s" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-5 bg-light">
+        <div class="container text-center">
+            <h3 class="mb-4">RSVP</h3>
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Will you attend?</label>
+                    <select class="form-control" id="attendance" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section id="comments" class="py-5">
+        <div class="container text-center">
+            <h3 class="mb-4">Comments</h3>
+            <div id="commentsList">
+                <!-- Comments will be dynamically added here -->
+            </div>
+            <form id="commentForm" class="mt-4">
+                <div class="form-group">
+                    <label for="commentName">Name:</label>
+                    <input type="text" class="form-control" id="commentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="commentText">Comment:</label>
+                    <textarea class="form-control" id="commentText" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Comment</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-3 bg-dark text-white">
+        <p>&copy; 2024 John & Jane's Wedding</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+// RSVP Form Submission
+document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let attendance = document.getElementById('attendance').value;
+
+    alert(`Thank you, ${name}! Your RSVP has been received.`);
+
+    // Reset form
+    document.getElementById('rsvpForm').reset();
+});
+
+// Comment Form Submission
+document.getElementById('commentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let commentName = document.getElementById('commentName').value;
+    let commentText = document.getElementById('commentText').value;
+
+    let commentList = document.getElementById('commentsList');
+    
+    let newComment = document.createElement('div');
+    newComment.classList.add('comment');
+    newComment.innerHTML = `<strong>${commentName}</strong><p>${commentText}</p>`;
+    
+    commentList.appendChild(newComment);
+    
+    // Reset form
+    document.getElementById('commentForm').reset();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUESIONER SURVEI KEPUASAN MASYARAKAT (SKM) PADA UNIT LAYANAN DINAS SOSIAL KOTA BANDUNG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"], input[type="time"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>KUESIONER SURVEI KEPUASAN MASYARAKAT (SKM)</h1>
+    <h2>PADA UNIT LAYANAN DINAS SOSIAL KOTA BANDUNG</h2>
+
+    <form id="surveyForm">
+        <div class="grid-container">
+            <div class="form-group">
+                <label for="tanggalSurvey">Tanggal Survey</label>
+                <input type="date" id="tanggalSurvey" name="tanggalSurvey" required>
+            </div>
+            <div class="form-group">
+                <label for="jamSurvey">Jam Survey</label>
+                <input type="time" id="jamSurvey" name="jamSurvey" required>
+            </div>
+            <div class="form-group">
+                <label for="jenisKelamin">Jenis Kelamin</label>
+                <select id="jenisKelamin" name="jenisKelamin" required>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="usia">Usia</label>
+                <input type="text" id="usia" name="usia" required>
+            </div>
+            <div class="form-group">
+                <label for="tahun">Tahun</label>
+                <input type="text" id="tahun" name="tahun" required>
+            </div>
+            <div class="form-group">
+                <label for="pendidikan">Pendidikan</label>
+                <select id="pendidikan" name="pendidikan" required>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="Lainnya">Lainnya (Sebutkan)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Jenis Layanan yang diterima</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="jenisLayanan" value="Layanan A" required> Layanan A</label>
+                    <label><input type="radio" name="jenisLayanan" value="Layanan B"> Layanan B</label>
+                    <label><input type="radio" name="jenisLayanan" value="Layanan C"> Layanan C</label>
+                    <label><input type="radio" name="jenisLayanan" value="Layanan D"> Layanan D</label>
+                </div>
+            </div>
+        </div>
+
+        <h2>PENDAPAT RESPONDEN TENTANG PELAYANAN</h2>
+
+        <div class="form-group">
+            <label>1. Bagaimana pendapat Saudara tentang kesesuaian persyaratan pelayanan dengan jenis pelayanannya?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q1" value="A" required> A) Tidak sesuai</label>
+                <label><input type="radio" name="q1" value="B"> B) Kurang Sesuai</label>
+                <label><input type="radio" name="q1" value="C"> C) Sesuai</label>
+                <label><input type="radio" name="q1" value="D"> D) Sangat sesuai</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>2. Bagaimana pemahaman Saudara tentang kemudahan prosedur pelayanan di unit ini?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q2" value="A" required> A) Tidak mudah</label>
+                <label><input type="radio" name="q2" value="B"> B) Kurang mudah</label>
+                <label><input type="radio" name="q2" value="C"> C) Mudah</label>
+                <label><input type="radio" name="q2" value="D"> D) Sangat mudah</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>3. Bagaimana pendapat Saudara tentang kecepatan Waktu dalam memberikan pelayanan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q3" value="A" required> A) Tidak cepat</label>
+                <label><input type="radio" name="q3" value="B"> B) Kurang cepat</label>
+                <label><input type="radio" name="q3" value="C"> C) Cepat</label>
+                <label><input type="radio" name="q3" value="D"> D) Sangat cepat</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>4. Bagaimana pendapat Saudara tentang kewajaran biaya/tarif dalam pelayanan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q4" value="A" required> A) Sangat mahal</label>
+                <label><input type="radio" name="q4" value="B"> B) Cukup mahal</label>
+                <label><input type="radio" name="q4" value="C"> C) Murah</label>
+                <label><input type="radio" name="q4" value="D"> D) Gratis</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>5. Bagaimana pendapat Saudara tentang kesesuaian produk pelayanan antara yang tecantum dalam standar pelayanan dengan hasil yang diberikan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q5" value="A" required> A) Tidak sesuai</label>
+                <label><input type="radio" name="q5" value="B"> B) Kurang sesuai</label>
+                <label><input type="radio" name="q5" value="C"> C) Sesuai</label>
+                <label><input type="radio" name="q5" value="D"> D) Sangat sesuai</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>6. Bagaimana pendapat Saudara tentang kompentensi/kemampuan petugas dalam pelayanan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q6" value="A" required> A) Tidak kompeten</label>
+                <label><input type="radio" name="q6" value="B"> B) Kurang kompeten</label>
+                <label><input type="radio" name="q6" value="C"> C) Kompeten</label>
+                <label><input type="radio" name="q6" value="D"> D) Sangat Kompeten</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>7. Bagaimana pendapat saudara perilaku petugas dalam pelayanan terkait kesopanan dan keramahan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q7" value="A" required> A) Tidak sopan dan ramah</label>
+                <label><input type="radio" name="q7" value="B"> B) Kurang sopan dan ramah</label>
+               
+                <label><input type="radio" name="q7" value="C"> C) Sopan dan ramah</label>
+                <label><input type="radio" name="q7" value="D"> D) Sangat sopan dan ramah</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>8. Bagaimana pendapat Saudara tentang kualitas sarana dan prasarana?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q8" value="A" required> A) Buruk</label>
+                <label><input type="radio" name="q8" value="B"> B) Cukup</label>
+                <label><input type="radio" name="q8" value="C"> C) Baik</label>
+                <label><input type="radio" name="q8" value="D"> D) Sangat Baik</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>9. Bagaimana pendapat Saudara tentang penanganan pengaduan pengguna layanan?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="q9" value="A" required> A) Tidak ada</label>
+                <label><input type="radio" name="q9" value="B"> B) Ada tetapi tidak berfungsi</label>
+                <label><input type="radio" name="q9" value="C"> C) Berfungsi kurang maksimal</label>
+                <label><input type="radio" name="q9" value="D"> D) Dikelola dengan baik</label>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Kirim</button>
+    </form>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Terima kasih atas partisipasi Anda dalam survei ini!');
+        });
+    </script>
+</body>
+</html>

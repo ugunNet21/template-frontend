@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grafik Survei Kepuasan Masyarakat</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+select, input {
+    margin-right: 10px;
+}
+
+</style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Grafik Survei Kepuasan Masyarakat</h1>
+            <div class="filters">
+                <select id="layanan">
+                    <option value>Pilih Layanan</option>
+                    <option value="layanan1">Layanan 1</option>
+                    <option value="layanan2">Layanan 2</option>
+                </select>
+                <input type="date" id="tanggalAwal">
+                <input type="date" id="tanggalAkhir">
+                <button id="filterBtn">Filter</button>
+            </div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            const data = {
+                labels: [
+                    'Question 1',
+                    'Question 2',
+                    'Question 3',
+                    'Question 4',
+                    'Question 5',
+                    'Question 6',
+                    'Question 7',
+                    'Question 8',
+                    'Question 9'
+                ],
+                datasets: [{
+                    label: 'Jumlah Orang yang Survei',
+                    data: [12, 19, 3, 5, 2, 3, 8, 6, 7], // Data contoh, ganti dengan data yang sesuai
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Tambahkan event listener untuk tombol filter jika diperlukan
+            document.getElementById('filterBtn').addEventListener('click', () => {
+                const layanan = document.getElementById('layanan').value;
+                const tanggalAwal = document.getElementById('tanggalAwal').value;
+                const tanggalAkhir = document.getElementById('tanggalAkhir').value;
+                
+                // Logika untuk memfilter data dapat ditambahkan di sini
+                console.log('Layanan:', layanan);
+                console.log('Tanggal Awal:', tanggalAwal);
+                console.log('Tanggal Akhir:', tanggalAkhir);
+                // Update grafik sesuai dengan filter yang dipilih
+            });
+
+            </script>
+    </body>
+</html>

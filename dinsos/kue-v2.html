@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuesioner Survei Kepuasan Masyarakat</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">KUESIONER SURVEI KEPUASAN MASYARAKAT (SKM)<br>PADA UNIT LAYANAN DINAS SOSIAL KOTA BANDUNG</h1>
+        
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="surveyDate">Tanggal Survey</label>
+                <input type="date" class="form-control" id="surveyDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="surveyTime">Jam Survey</label>
+                <input type="time" class="form-control" id="surveyTime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Jenis Kelamin</label>
+                <select class="form-control" id="gender" required>
+                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Usia</label>
+                <input type="number" class="form-control" id="age" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="education">Pendidikan</label>
+                <select class="form-control" id="education" required>
+                    <option value="" disabled selected>Pilih Pendidikan</option>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="Lainnya">Lainnya (Sebutkan)</option>
+                </select>
+                <input type="text" class="form-control mt-2" id="educationOther" placeholder="Sebutkan" style="display: none;">
+            </div>
+
+            <div class="form-group">
+                <label for="serviceType">Jenis Layanan yang diterima</label>
+                <input type="text" class="form-control" id="serviceType" required>
+            </div>
+
+            <h3 class="mt-4">PENDAPAT RESPONDEN TENTANG PELAYANAN</h3>
+            <p>Lingkupi kode huruf sesuai jawaban masyarakat/responden</p>
+
+            <!-- Question 1 -->
+            <div class="form-group">
+                <label>1. Bagaimana pendapat Saudara tentang kesesuaian persyaratan pelayanan dengan jenis pelayanannya?</label>
+                <select class="form-control" id="question1" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak sesuai</option>
+                    <option value="B">B) Kurang Sesuai</option>
+                    <option value="C">C) Sesuai</option>
+                    <option value="D">D) Sangat sesuai</option>
+                </select>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="form-group">
+                <label>2. Bagaimana pemahaman Saudara tentang kemudahan prosedur pelayanan di unit ini?</label>
+                <select class="form-control" id="question2" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak mudah</option>
+                    <option value="B">B) Kurang mudah</option>
+                    <option value="C">C) Mudah</option>
+                    <option value="D">D) Sangat mudah</option>
+                </select>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="form-group">
+                <label>3. Bagaimana pendapat Saudara tentang kecepatan Waktu dalam memberikan pelayanan?</label>
+                <select class="form-control" id="question3" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak cepat</option>
+                    <option value="B">B) Kurang cepat</option>
+                    <option value="C">C) Cepat</option>
+                    <option value="D">D) Sangat cepat</option>
+                </select>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="form-group">
+                <label>4. Bagaimana pendapat Saudara tentang kewajaran biaya/tarif dalam pelayanan?</label>
+                <select class="form-control" id="question4" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Sangat mahal</option>
+                    <option value="B">B) Cukup mahal</option>
+                    <option value="C">C) Murah</option>
+                    <option value="D">D) Gratis</option>
+                </select>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="form-group">
+                <label>5. Bagaimana pendapat Saudara tentang kesesuaian produk pelayanan antara yang tertera dalam standar pelayanan dengan hasil yang diberikan?</label>
+                <select class="form-control" id="question5" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak sesuai</option>
+                    <option value="B">B) Kurang sesuai</option>
+                    <option value="C">C) Sesuai</option>
+                    <option value="D">D) Sangat sesuai</option>
+                </select>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="form-group">
+                <label>6. Bagaimana pendapat Saudara tentang kompetensi/kemampuan petugas dalam pelayanan?</label>
+                <select class="form-control" id="question6" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak kompeten</option>
+                    <option value="B">B) Kurang kompeten</option>
+                    <option value="C">C) Kompeten</option>
+                    <option value="D">D) Sangat Kompeten</option>
+                </select>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="form-group">
+                <label>7. Bagaimana pendapat Saudara perilaku petugas dalam pelayanan terkait kesopanan dan keramahan?</label>
+                <select class="form-control" id="question7" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak sopan dan ramah</option>
+                    <option value="B">B) Kurang sopan dan ramah</option>
+                    <option value="C">C) Sopan dan ramah</option>
+                    <option value="D">D) Sangat sopan dan ramah</option>
+                </select>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="form-group">
+                <label>8. Bagaimana pendapat Saudara tentang kualitas sarana dan prasarana?</label>
+                <select class="form-control" id="question8" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Buruk</option>
+                    <option value="B">B) Cukup</option>
+                    <option value="C">C) Baik</option>
+                    <option value="D">D) Sangat Baik</option>
+                </select>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="form-group">
+                <label>9. Bagaimana pendapat Saudara tentang penanganan pengaduan pengguna layanan?</label>
+                <select class="form-control" id="question9" required>
+                    <option value="" disabled selected>Pilih Jawaban</option>
+                    <option value="A">A) Tidak ada</option>
+                    <option value="B">B) Ada tetapi tidak berfungsi</option>
+                    <option value="C">C) Berfungsi kurang maksimal</option>
+                    <option value="D">D) Dikelola dengan baik</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback">Kritik dan Saran</label>
+                <textarea class="form-control" id="feedback" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kirim</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="

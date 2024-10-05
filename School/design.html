@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Ihsan Cimencrang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header .logo {
+            font-size: 1.5em;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .search-container input {
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+
+        .card {
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #BBBBBB;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #BBBBBB;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-success text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">Al Ihsan Cimencrang</div>
+            <nav class="nav-links d-none d-md-flex align-items-center" id="navLinks">
+                <a href="#home" class="nav-link text-white">Home</a>
+                <a href="#about" class="nav-link text-white">About</a>
+                <a href="#ppdb" class="nav-link text-white">PPDB</a>
+                <a href="#contact" class="nav-link text-white">Contact</a>
+                <div class="search-container ms-3">
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+                </div>
+                <button class="btn btn-outline-light ms-3" id="themeToggle">Light/Dark Mode</button>
+            </nav>
+            <div class="hamburger d-md-none" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="d-md-none" id="mobileNav">
+        <ul class="nav flex-column" id="mobileNavLinks">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#ppdb" class="nav-link">PPDB</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container my-5">
+        <section id="home" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h1 class="card-title">Welcome to Al Ihsan Cimencrang</h1>
+                    <p class="card-text">Providing quality education for SMP and SMA students in Bandung.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title">About Us</h2>
+                    <p class="card-text">Al Ihsan Cimencrang is a premier educational institution offering junior and senior high school education. Our mission is to nurture well-rounded individuals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ppdb" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title">PPDB</h2>
+                    <p class="card-text">Enrollment for the new academic year is now open. Join us for a bright future.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title">Contact Us</h2>
+                    <p class="card-text">Address: Jl. Cimencrang No.123, Bandung</p>
+                    <p class="card-text">Phone: (022) 123-4567</p>
+                    <p class="card-text">Email: info@alihsanbandung.sch.id</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-success text-white text-center py-3">
+        <p>&copy; 2024 Al Ihsan Cimencrang. All rights reserved.</p>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Search..." id="modalSearchInput">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="modalSearchBtn">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavLinks = document.getElementById('mobileNavLinks');
+            const modalSearchInput = document.getElementById('modalSearchInput');
+            const modalSearchBtn = document.getElementById('modalSearchBtn');
+
+            // Check local storage for theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                // Save theme preference to local storage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // Toggle mobile navigation menu
+            hamburger.addEventListener('click', () => {
+                mobileNav.classList.toggle('show');
+            });
+
+            // Handle modal search button click
+            modalSearchBtn.addEventListener('click', () => {
+                const filter = modalSearchInput.value.trim().toLowerCase();
+                const sections = document.querySelectorAll('main section');
+                sections.forEach(section => {
+                    const text = section.textContent.trim().toLowerCase();
+                    if (text.includes(filter)) {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+
+            // Close mobile navigation on link click
+            mobileNavLinks.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    mobileNav.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

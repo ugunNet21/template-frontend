@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <style>
+        @mixin font-bold {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
+
+@mixin font {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --bg: #f8f8f8;
+    --grey: #999;
+    --dark: #1a1a1a;
+    --light: #e6e6e6;
+    --wrapper: 1000px;
+    --blue: #00b0ff;
+}
+
+body {
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    @include font;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.wrapper {
+    position: relative;
+    left: 50%;
+    width: var(--wrapper);
+    max-width: 100%;
+    height: 100vh;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.left {
+    width: 35%;
+    border-right: 1px solid var(--light);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    @media (max-width: 768px) {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--light);
+    }
+}
+
+.top {
+    padding: 20px;
+    border-bottom: 1px solid var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+}
+
+input {
+    width: calc(100% - 80px);
+    padding: 10px;
+    border: 1px solid var(--light);
+    border-radius: 21px;
+    @include font;
+    &:focus {
+        outline: none;
+    }
+}
+
+a.search {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--light);
+    background-color: var(--blue);
+    border-radius: 50%;
+}
+
+.people {
+    flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.person {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--light);
+    transition: background-color 0.3s;
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+        object-fit: cover;
+    }
+    .name {
+        @include font-bold;
+    }
+    .time {
+        font-size: 12px;
+        color: var(--grey);
+        margin-left: auto;
+    }
+    .preview {
+        font-size: 14px;
+        color: var(--grey);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &.active, &:hover {
+        background-color: var(--blue);
+        color: var(--white);
+        img {
+            border: 2px solid var(--white);
+        }
+    }
+}
+
+.right {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.top {
+    padding: 15px;
+    background-color: #eceff1;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: var(--grey);
+    .name {
+        color: var(--dark);
+        @include font-bold;
+    }
+}
+
+.chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: none;
+    &.active-chat {
+        display: block;
+    }
+}
+
+.write {
+    padding: 10px;
+    border-top: 1px solid var(--light);
+    display: flex;
+    align-items: center;
+    background-color: #eceff1;
+    input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        border-radius: 21px;
+        @include font;
+    }
+    .write-link {
+        margin-left: 10px;
+        &.attach:before {
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/attachment.png');
+        }
+        &.smiley:before {
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/smiley.png');
+        }
+        &.send:before {
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/send.png');
+        }
+    }
+}
+
+.bubble {
+    position: relative;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+    }
+    &.you {
+        background-color: var(--blue);
+        color: var(--white);
+        float: left;
+        &:before {
+            left: -10px;
+            border-right: 10px solid var(--blue);
+        }
+    }
+    &.me {
+        background-color: #eceff1;
+        color: var(--dark);
+        float: right;
+        &:before {
+            right: -10px;
+            border-left: 10px solid #eceff1;
+        }
+    }
+}
+
+.conversation-start {
+    text-align: center;
+    margin-bottom: 20px;
+    span {
+        font-size: 14px;
+        color: var(--grey);
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 1px;
+            background-color: var(--light);
+        }
+        &:before {
+            left: 0;
+        }
+        &:after {
+            right: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--light);
+    }
+    .right {
+        width: 100%;
+    }
+    .write {
+        flex-direction: column;
+        input {
+            width: 100%;
+        }
+        .write-link {
+            margin: 5px 0;
+        }
+    }
+    .chat {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="left">
+                <div class="top">
+                    <input type="text" placeholder="Search" />
+                    <a href="javascript:;" class="search"></a>
+                </div>
+                <ul class="people">
+                    <li class="person" data-chat="person1">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+                        <span class="name">Thomas Bangalter</span>
+                        <span class="time">2:09 PM</span>
+                        <span class="preview">I was wondering...</span>
+                    </li>
+                    <!-- Add more people here -->
+                </ul>
+            </div>
+            <div class="right">
+                <div class="top"><span>To: <span class="name">Dog Woofson</span></span></div>
+                <div class="chat" data-chat="person1">
+                    <div class="conversation-start">
+                        <span>Today, 6:48 AM</span>
+                    </div>
+                    <div class="bubble you">Hello,</div>
+                    <div class="bubble you">it's me.</div>
+                    <div class="bubble you">I was wondering...</div>
+                </div>
+                <!-- Add more chat sections here -->
+                <div class="write">
+                    <a href="javascript:;" class="write-link attach"></a>
+                    <input type="text" placeholder="Type a message" />
+                    <a href="javascript:;" class="write-link smiley"></a>
+                    <a href="javascript:;" class="write-link send"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Add active chat and person class for demo purposes
+    document.querySelector('.chat[data-chat=person2]').classList.add('active-chat');
+    document.querySelector('.person[data-chat=person2]').classList.add('active');
+
+    const friends = {
+        list: document.querySelector('ul.people'),
+        all: document.querySelectorAll('.left .person'),
+        name: ''
+    };
+
+    const chat = {
+        container: document.querySelector('.container .right'),
+        current: null,
+        person: null,
+        name: document.querySelector('.container .right .top .name')
+    };
+
+    friends.all.forEach(f => {
+        f.addEventListener('mousedown', () => {
+            if (!f.classList.contains('active')) {
+                setActiveChat(f);
+            }
+        });
+    });
+
+    function setActiveChat(f) {
+        friends.list.querySelector('.active')?.classList.remove('active');
+        f.classList.add('active');
+        chat.current = chat.container.querySelector('.active-chat');
+        chat.person = f.getAttribute('data-chat');
+        chat.current?.classList.remove('active-chat');
+        chat.container.querySelector(`[data-chat="${chat.person}"]`)?.classList.add('active-chat');
+        friends.name = f.querySelector('.name').innerText;
+        chat.name.innerHTML = friends.name;
+    }
+});
+
+    </script>
+</body>
+</html>
