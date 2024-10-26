@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Buku</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CRUD Buku</h1>
+        <form id="bookForm">
+            <input type="text" id="title" placeholder="Judul Buku" required>
+            <input type="text" id="author" placeholder="Penulis" required>
+            <input type="number" id="year" placeholder="Tahun" required>
+            <button type="submit">Tambah Buku</button>
+        </form>
+        <table id="bookTable">
+            <thead>
+                <tr>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Tahun</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data Buku Akan Ditambahkan Di Sini -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        const bookForm = document.getElementById('bookForm');
+        const bookTableBody = document.querySelector('#bookTable tbody');
+
+        let books = [];
+        let editIndex = -1;
+
+        bookForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const year = document.getElementById('year').value;
+
+            if (editIndex >= 0) {
+                books[editIndex] = { title, author, year };
+                editIndex = -1;
+            } else {
+                books.push({ title, author, year });
+            }
+
+            bookForm.reset();
+            renderTable();
+        });
+
+        function renderTable() {
+            bookTableBody.innerHTML = '';
+            books.forEach((book, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.year}</td>
+            <td>
+                <button onclick="editBook(${index})">Edit</button>
+                <button onclick="deleteBook(${index})">Hapus</button>
+            </td>
+        `;
+                bookTableBody.appendChild(row);
+            });
+        }
+
+        function editBook(index) {
+            const book = books[index];
+            document.getElementById('title').value = book.title;
+            document.getElementById('author').value = book.author;
+            document.getElementById('year').value = book.year;
+            editIndex = index;
+        }
+
+        function deleteBook(index) {
+            books.splice(index, 1);
+            renderTable();
+        }
+
+    </script>
+</body>
+
+</html>
